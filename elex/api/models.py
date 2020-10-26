@@ -341,6 +341,8 @@ class CandidateReportingUnit(APElection):
         self.incumbent = kwargs.get('incumbent', False)
         self.electtotal = kwargs.get('electtotal', 0)
         self.electwon = kwargs.get('electWon', 0)
+        self.avotes = kwargs.get('avotes', 0)
+        self.eevp = kwargs.get('eevp', 0)
 
         self.set_polid()
         self.set_unique_id()
@@ -421,6 +423,8 @@ class CandidateReportingUnit(APElection):
             ('votecount', self.votecount),
             ('votepct', round(self.votepct, PCT_PRECISION)),
             ('winner', self.winner),
+            ('avotes', self.avotes),
+            ('eevp', self.eevp),
         ))
 
     def __unicode__(self):
@@ -487,6 +491,9 @@ class ReportingUnit(APElection):
         self.racetype = kwargs.get('racetype', None)
         self.racetypeid = kwargs.get('racetypeid', None)
         self.officeid = kwargs.get('officeid', None)
+        self.eevp = kwargs.get('eevp', None)
+        self.avotes = kwargs.get('avotes', None)
+
         self.officename = kwargs.get('officename', None)
         self.seatname = kwargs.get('seatname', None)
         self.description = kwargs.get('description', None)
@@ -597,6 +604,9 @@ class ReportingUnit(APElection):
             ('test', self.test),
             ('uncontested', self.uncontested),
             ('votecount', self.votecount),
+            ('eevp', self.eevp),
+            ('avotes', self.avotes),
+
         ))
 
 
@@ -627,6 +637,8 @@ class Race(APElection):
         self.candidates = kwargs.get('candidates', [])
         self.reportingunits = kwargs.get('reportingUnits', [])
         self.is_ballot_measure = False
+        self.eevp = kwargs.get('eevp', None)
+        self.avotes = kwargs.get('avotes', None)
 
         self.set_id_field()
 
@@ -783,6 +795,8 @@ class Race(APElection):
             ('statepostal', self.statepostal),
             ('test', self.test),
             ('uncontested', self.uncontested)
+            ('avotes', self.avotes),
+            ('eevp', self.eevp),
         ))
 
     def __unicode__(self):
@@ -1053,7 +1067,8 @@ class Election(APElection):
             test=self.testresults,
             national=self.national,
             officeID=self.officeids,
-            apiKey=self.api_key
+            apiKey=self.api_key,
+            avotes=True
         )
 
         race_objs = self.get_race_objects(raw_races)
@@ -1073,7 +1088,8 @@ class Election(APElection):
             test=self.testresults,
             national=self.national,
             officeID=self.officeids,
-            apiKey=self.api_key
+            apiKey=self.api_key,
+            avotes=True
         )
         race_objs = self.get_race_objects(raw_races)
         races, reporting_units, candidate_reporting_units = self.get_units(
@@ -1092,7 +1108,8 @@ class Election(APElection):
             test=self.testresults,
             national=self.national,
             officeID=self.officeids,
-            apiKey=self.api_key
+            apiKey=self.api_key,
+            avotes=True
         )
         race_objs = self.get_race_objects(raw_races)
         races, reporting_units, candidate_reporting_units = self.get_units(
@@ -1112,7 +1129,8 @@ class Election(APElection):
             test=self.testresults,
             national=self.national,
             officeID=self.officeids,
-            apiKey=self.api_key
+            apiKey=self.api_key,
+            avotes=True
         )
         race_objs = self.get_race_objects(raw_races)
         races, reporting_units, candidate_reporting_units = self.get_units(
@@ -1131,7 +1149,8 @@ class Election(APElection):
             test=self.testresults,
             national=self.national,
             officeID=self.officeids,
-            apiKey=self.api_key
+            apiKey=self.api_key,
+            avotes=True
         )
         race_objs = self.get_race_objects(raw_races)
         races, reporting_units, candidate_reporting_units = self.get_units(
@@ -1152,7 +1171,8 @@ class Election(APElection):
             level="ru",
             test=self.testresults,
             national=self.national,
-            apiKey=self.api_key
+            apiKey=self.api_key,
+            avotes=True
         )
         race_objs = self.get_race_objects(raw_races)
         races, reporting_units, candidate_reporting_units = self.get_units(
