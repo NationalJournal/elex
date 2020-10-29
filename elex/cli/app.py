@@ -95,6 +95,11 @@ Sets the vote, delegate, and reporting precinct counts to zero.',
                 action='store',
                 help='Specify a value for a `batchname` column to append to each row.',
             )),
+            (['--api_key'], dict(
+                action='store',
+                help='Specify API key.',
+                default=None
+            )),
         ]
 
     @expose(hide=True)

@@ -13,6 +13,7 @@ def add_election_hook(app):
         liveresults=not app.pargs.not_live,
         resultslevel=app.pargs.results_level,
         setzerocounts=app.pargs.set_zero_counts,
+        api_key=app.pargs.api_key,
         is_test=False,
         raceids=[],
         officeids=None
