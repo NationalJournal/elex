@@ -76,23 +76,23 @@ def api_request(path, **params):
 
     A properly formatted request:
     * Modifies the BASE_URL with a path.
-    * Contains an API_KEY.
     * Returns a response object.
 
     :param \**params:
         Extra parameters to pass to `requests`. For example,
-        `apiKey="<YOUR API KEY>`, your AP API key, or `national=True`,
-        for national-only results.
+        `national=True`, for national-only results.
     """
-    params['apiKey'] = params.get('apiKey') or elex.API_KEY
-    if not params['apiKey']:
-        raise APAPIKeyException()
+    params["format"] = "json"
 
-    params['format'] = 'json'
+    # from v3, apiKey is passed in the header, so let's remove it from the params
+    if "apiKey" in params:
+        del params["apiKey"]
 
     params = sorted(params.items())  # Sort for consistent caching
 
-    url = '{0}{1}'.format(elex.BASE_URL, path.replace('//', '/'))
+    url = "{0}{1}".format(elex.BASE_URL, path.replace("//", "/"))
+    print("Requesting {0} from {1}".format(params, url))
+
     response = cache.get(url, params=params)
     response.raise_for_status()
 
