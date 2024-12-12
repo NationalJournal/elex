@@ -27,7 +27,7 @@ setup(
         "cement==2.10.2",
         "lockfile==0.12.2",
         "pymongo==3.6.1",
-        "python-dateutil==2.7.*",
+        "python-dateutil==2.9.*",
         "requests>=2.22.0,<2.28",
         "ujson==1.35",
     ],
